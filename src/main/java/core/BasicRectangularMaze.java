@@ -1,9 +1,6 @@
 package core;
 
-public class BasicRectangularMaze implements RectangularMaze {
-
-    private final int width;
-    private final int height;
+public class BasicRectangularMaze extends RectangularMaze {
 
     // walls on the bottom of a cell
     private final boolean[][] bottomWalls;
@@ -12,6 +9,7 @@ public class BasicRectangularMaze implements RectangularMaze {
     private final boolean[][] rightWalls;
 
     public BasicRectangularMaze(int width, int height) {
+        super(width, height);
         bottomWalls = new boolean[width][height];
         rightWalls = new boolean[width][height];
 
@@ -24,19 +22,6 @@ public class BasicRectangularMaze implements RectangularMaze {
         for (var i = 0; i < height; i++) {
             rightWalls[width - 1][i] = true;
         }
-
-        this.width = width;
-        this.height = height;
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
     }
 
     @Override
@@ -109,18 +94,5 @@ public class BasicRectangularMaze implements RectangularMaze {
     public void addWallRight(Coordinate2D cell) {
         ValidateCell(cell);
         rightWalls[cell.getX()][cell.getY()] = true;
-    }
-
-    private void ValidateCell(Coordinate2D cell) {
-        if (cell == null) {
-            throw new IllegalArgumentException("Cell can't be null");
-        }
-
-        if (cell.getX() < 0 || cell.getX() >= width) {
-            throw new IndexOutOfBoundsException("x coordinate of cell is out of bounds: %d. Must be in [0, %d)".formatted(cell.getX(), width));
-        }
-        if (cell.getY() < 0 || cell.getY() >= height) {
-            throw new IndexOutOfBoundsException("y coordinate of cell is out of bounds: %d. Must be in [0, %d)".formatted(cell.getY(), height));
-        }
     }
 }
