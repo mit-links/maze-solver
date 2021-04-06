@@ -1,4 +1,7 @@
-package core;
+package core.mazes;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A rectangular maze.
@@ -10,15 +13,23 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
     private final int height;
 
     public RectangularMaze(int width, int height) {
+        if (width <= 0) {
+            throw new IllegalArgumentException("Width must be positive");
+        }
+
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height must be positive");
+        }
+
         this.width = width;
         this.height = height;
     }
 
-    public abstract void addWall(Coordinate2D cell);
+    public abstract void addWall(@NotNull Coordinate2D cell);
 
-    public abstract void removeWall(Coordinate2D cell);
+    public abstract void removeWall(@NotNull Coordinate2D cell);
 
-    public abstract boolean hasWall(Coordinate2D cell);
+    public abstract boolean hasWall(@NotNull Coordinate2D cell);
 
     public int getWidth() {
         return width;
@@ -28,7 +39,7 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         return height;
     }
 
-    protected void ValidateCell(Coordinate2D cell) {
+    protected void ValidateCell(@Nullable Coordinate2D cell) {
         if (cell == null) {
             throw new IllegalArgumentException("Cell can't be null");
         }

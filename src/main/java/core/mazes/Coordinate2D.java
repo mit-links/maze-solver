@@ -1,4 +1,4 @@
-package core;
+package core.mazes;
 
 /**
  * A 2D coordinate, i.e. a coordinate that has an x and a y value

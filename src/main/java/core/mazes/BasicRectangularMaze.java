@@ -1,8 +1,10 @@
-package core;
+package core.mazes;
+
+import org.jetbrains.annotations.NotNull;
 
 public class BasicRectangularMaze extends RectangularMaze {
 
-    private final CellContent[][] cells;
+    private final @NotNull CellContent[][] cells;
 
     public BasicRectangularMaze(int width, int height) {
         super(width, height);
@@ -18,20 +20,20 @@ public class BasicRectangularMaze extends RectangularMaze {
     }
 
     @Override
-    public void addWall(Coordinate2D cell) {
+    public void addWall(@NotNull Coordinate2D cell) {
         ValidateCell(cell);
         cells[cell.getX()][cell.getY()] = CellContent.Wall;
     }
 
     @Override
-    public void removeWall(Coordinate2D cell) {
+    public void removeWall(@NotNull Coordinate2D cell) {
 
         ValidateCell(cell);
         cells[cell.getX()][cell.getY()] = CellContent.Empty;
     }
 
     @Override
-    public boolean hasWall(Coordinate2D cell) {
+    public boolean hasWall(@NotNull Coordinate2D cell) {
         ValidateCell(cell);
         return cells[cell.getX()][cell.getY()] == CellContent.Wall;
     }
