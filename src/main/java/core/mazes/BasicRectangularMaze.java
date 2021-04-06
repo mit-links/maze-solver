@@ -8,15 +8,7 @@ public class BasicRectangularMaze extends RectangularMaze {
 
     public BasicRectangularMaze(int width, int height) {
         super(width, height);
-
         cells = new CellContent[width][height];
-
-        for (var i = 0; i < height; i++) {
-            for (var j = 0; j < width; j++) {
-                //the borders of the maze are considered walls initially
-                cells[j][i] = i == 0 || j == 0 || i == height - 1 || j == width - 1 ? CellContent.Wall : CellContent.Empty;
-            }
-        }
     }
 
     @Override
@@ -27,7 +19,6 @@ public class BasicRectangularMaze extends RectangularMaze {
 
     @Override
     public void removeWall(@NotNull Coordinate2D cell) {
-
         ValidateCell(cell);
         cells[cell.getX()][cell.getY()] = CellContent.Empty;
     }

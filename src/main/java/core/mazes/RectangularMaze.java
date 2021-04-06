@@ -31,12 +31,58 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
 
     public abstract boolean hasWall(@NotNull Coordinate2D cell);
 
+    public @Nullable Coordinate2D getCellLeft(@NotNull Coordinate2D cell) {
+        if (cell.getX() == 0) {
+            //cell is in left-most column
+            return null;
+        }
+        return new Coordinate2D(cell.getX() - 1, cell.getY());
+    }
+
+    public @Nullable Coordinate2D getCellRight(@NotNull Coordinate2D cell) {
+        if (cell.getX() == width - 1) {
+            //cell is in right-most column
+            return null;
+        }
+        return new Coordinate2D(cell.getX() + 1, cell.getY());
+    }
+
+    public @Nullable Coordinate2D getCellAbove(@NotNull Coordinate2D cell) {
+        if (cell.getY() == 0) {
+            //cell is in top row
+            return null;
+        }
+        return new Coordinate2D(cell.getX(), cell.getY() - 1);
+    }
+
+    public @Nullable Coordinate2D getCellBelow(@NotNull Coordinate2D cell) {
+        if (cell.getY() == height - 1) {
+            //cell is in bottom row
+            return null;
+        }
+        return new Coordinate2D(cell.getX(), cell.getY() + 1);
+    }
+
     public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public String getStringRepresentation() {
+        var stringBuilder = new StringBuilder();
+
+        for (var y = 0; y < height; y++) {
+            for (var x = 0; x < width; x++) {
+                stringBuilder.append(hasWall(new Coordinate2D(x, y)) ? "X" : "O");
+            }
+            stringBuilder.append(System.lineSeparator());
+        }
+
+        return stringBuilder.toString();
     }
 
     protected void ValidateCell(@Nullable Coordinate2D cell) {

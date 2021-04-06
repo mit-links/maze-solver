@@ -14,13 +14,12 @@ public abstract class MazeCreatorBase<MazeType extends Maze> implements MazeCrea
     /**
      * Create a maze
      *
-     * @param mazeTemplate  the maze template to start from
+     * @param maze          the maze template to fill
      * @param algorithmType the type of algorithm to use to crate the maze
-     * @return the created maze
      */
-    protected @NotNull MazeType Create(MazeType mazeTemplate, MazeCreationAlgorithmType algorithmType) {
+    protected void create(MazeType maze, MazeCreationAlgorithmType algorithmType) {
         var algorithm = getAlgorithm(algorithmType);
-        return algorithm.CreateMaze(mazeTemplate);
+        algorithm.createMaze(maze);
     }
 
     protected @NotNull MazeCreationAlgorithmBase<MazeType> getAlgorithm(MazeCreationAlgorithmType algorithmType) {

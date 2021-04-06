@@ -10,7 +10,12 @@ public abstract class MazeCreationAlgorithmBase<MazeType extends Maze> implement
         this.type = type;
     }
 
-    public abstract @NotNull MazeType CreateMaze(@NotNull MazeType mazeTemplate);
+    /**
+     * Create a maze
+     *
+     * @param mazeTemplate the maze template to fill
+     */
+    public abstract void createMaze(@NotNull MazeType mazeTemplate);
 
     @Override
     public MazeCreationAlgorithmType getType() {

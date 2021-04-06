@@ -21,9 +21,11 @@ public abstract class RectangularMazeCreator extends MazeCreatorBase<Rectangular
      */
     public @NotNull RectangularMaze Create(int width, int height, MazeCreationAlgorithmType mazeCreationAlgorithmType) {
         Validate(width, height);
-        var mazeTemplate = CreateMazeTemplate(width, height);
 
-        return getAlgorithm(mazeCreationAlgorithmType).CreateMaze(mazeTemplate);
+        var maze = CreateMazeTemplate(width, height);
+        create(maze, mazeCreationAlgorithmType);
+
+        return maze;
     }
 
     /**
