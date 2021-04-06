@@ -1,4 +1,4 @@
-package core;
+package core.solution;
 
 /**
  * A solution to a maze
