@@ -1,6 +1,8 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/compiler.xml
+/jarRepositories.xml
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
