@@ -14,21 +14,11 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         this.height = height;
     }
 
-    public abstract boolean hasWallAbove(Coordinate2D cell);
+    public abstract void addWall(Coordinate2D cell);
 
-    public abstract boolean hasWallBelow(Coordinate2D cell);
+    public abstract void removeWall(Coordinate2D cell);
 
-    public abstract boolean hasWallLeft(Coordinate2D cell);
-
-    public abstract boolean hasWallRight(Coordinate2D cell);
-
-    public abstract void addWallAbove(Coordinate2D cell);
-
-    public abstract void addWallBelow(Coordinate2D cell);
-
-    public abstract void addWallLeft(Coordinate2D cell);
-
-    public abstract void addWallRight(Coordinate2D cell);
+    public abstract boolean hasWall(Coordinate2D cell);
 
     public int getWidth() {
         return width;
