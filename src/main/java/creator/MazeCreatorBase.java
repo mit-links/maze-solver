@@ -1,8 +1,8 @@
 package creator;
 
-import core.mazes.Maze;
 import creator.algorithm.MazeCreationAlgorithmBase;
 import creator.algorithm.MazeCreationAlgorithmType;
+import maze.Maze;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -1,7 +1,7 @@
 package creator;
 
-import core.mazes.BasicRectangularMaze;
-import core.mazes.RectangularMaze;
+import maze.BasicRectangularMaze;
+import maze.RectangularMaze;
 import org.jetbrains.annotations.NotNull;
 
 /**

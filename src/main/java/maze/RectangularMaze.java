@@ -1,4 +1,4 @@
-package core.mazes;
+package maze;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,12 +24,6 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         this.width = width;
         this.height = height;
     }
-
-    public abstract void addWall(@NotNull Coordinate2D cell);
-
-    public abstract void removeWall(@NotNull Coordinate2D cell);
-
-    public abstract boolean hasWall(@NotNull Coordinate2D cell);
 
     public @Nullable Coordinate2D getCellLeft(@NotNull Coordinate2D cell) {
         if (cell.getX() == 0) {
@@ -71,13 +65,22 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         return height;
     }
 
+    public Coordinate2D getTopLeft() {
+        return new Coordinate2D(0, 0);
+    }
+
+    public Coordinate2D getBottomRight() {
+        return new Coordinate2D(width - 1, height - 1);
+    }
+
     @Override
     public String getStringRepresentation() {
         var stringBuilder = new StringBuilder();
 
         for (var y = 0; y < height; y++) {
             for (var x = 0; x < width; x++) {
-                stringBuilder.append(hasWall(new Coordinate2D(x, y)) ? "X" : "O");
+                var isWall = getCellType(new Coordinate2D(x, y)).equals(MazeCellType.WALL);
+                stringBuilder.append(isWall ? "X" : "O");
             }
             stringBuilder.append(System.lineSeparator());
         }

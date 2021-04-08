@@ -1,6 +1,6 @@
 package creator.algorithm;
 
-import core.mazes.Maze;
+import maze.Maze;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class MazeCreationAlgorithmBase<MazeType extends Maze> implements MazeCreationAlgorithm {

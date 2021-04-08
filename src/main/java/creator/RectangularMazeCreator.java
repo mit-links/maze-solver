@@ -1,9 +1,9 @@
 package creator;
 
-import core.mazes.RectangularMaze;
 import creator.algorithm.MazeCreationAlgorithmBase;
 import creator.algorithm.MazeCreationAlgorithmType;
-import creator.algorithm.PrimAlgorithm;
+import creator.algorithm.NoLoopAlgorithm;
+import maze.RectangularMaze;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,8 +35,8 @@ public abstract class RectangularMazeCreator extends MazeCreatorBase<Rectangular
 
     @Override
     protected @NotNull MazeCreationAlgorithmBase<RectangularMaze> getAlgorithm(MazeCreationAlgorithmType algorithmType) {
-        if (algorithmType == MazeCreationAlgorithmType.Prim) {
-            return new PrimAlgorithm();
+        if (algorithmType == MazeCreationAlgorithmType.NO_LOOP) {
+            return new NoLoopAlgorithm();
         }
         return super.getAlgorithm(algorithmType);
     }

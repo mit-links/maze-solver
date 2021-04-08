@@ -1,19 +1,19 @@
 package creator.algorithm;
 
-import core.mazes.Coordinate2D;
-import core.mazes.RectangularMaze;
+import maze.Coordinate2D;
+import maze.MazeCellType;
+import maze.RectangularMaze;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Create a maze by using Prim's algorithm.
- * This creates a maze that is a minimum spanning tree, i.e. it has no loops.
+ * The algorithm visits unvisited neighbors and adds them to the maze, if no loop is created.
  */
-public class PrimAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> {
-    public PrimAlgorithm() {
-        super(MazeCreationAlgorithmType.Prim);
+public class NoLoopAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> {
+    public NoLoopAlgorithm() {
+        super(MazeCreationAlgorithmType.NO_LOOP);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class PrimAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> {
         //1. set the entire maze to walls
         for (var y = 0; y < height; y++) {
             for (var x = 0; x < width; x++) {
-                mazeTemplate.addWall(new Coordinate2D(x, y));
+                mazeTemplate.setCellType(new Coordinate2D(x, y), MazeCellType.WALL);
             }
         }
 
@@ -34,7 +34,6 @@ public class PrimAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> {
         var origin = new Coordinate2D(0, 0);
         wallList.add(origin);
 
-        //TODO FIX
         //3. while there are still walls in the wall list, add cells to maze
         var random = new Random();
         while (!wallList.isEmpty()) {
@@ -55,19 +54,19 @@ public class PrimAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> {
                 if (!visited[neighbor.getX()][neighbor.getY()]) {
                     unvisitedNeighbors.add(neighbor);
                 }
-                if (!mazeTemplate.hasWall(neighbor)) {
+                if (!mazeTemplate.getCellType(neighbor).equals(MazeCellType.WALL)) {
                     nonWallNeighbors++;
                 }
             }
 
             if (nonWallNeighbors <= 1) {
                 //we can remove the wall without creating a loop
-                mazeTemplate.removeWall(cell);
+                mazeTemplate.setCellType(cell, MazeCellType.EMPTY);
+                wallList.addAll(unvisitedNeighbors);
             }
 
             //prepare for the next iteration
             visited[cell.getX()][cell.getY()] = true;
-            wallList.addAll(unvisitedNeighbors);
         }
     }
 }

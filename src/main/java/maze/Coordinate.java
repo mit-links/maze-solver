@@ -1,4 +1,4 @@
-package core.mazes;
+package maze;
 
 /**
  * A coordinate of a maze cell

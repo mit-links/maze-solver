@@ -1,4 +1,4 @@
-package core.mazes;
+package maze;
 
 import java.util.Objects;
 
