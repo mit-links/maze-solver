@@ -25,6 +25,36 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         this.height = height;
     }
 
+    @Override
+    public MazeCellType getCellTypeGeneric(@NotNull Coordinate cell) {
+        return getCellType((Coordinate2D) cell);
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public @NotNull String getStringRepresentation() {
+        var stringBuilder = new StringBuilder();
+
+        for (var y = 0; y < height; y++) {
+            for (var x = 0; x < width; x++) {
+                var isWall = getCellType(new Coordinate2D(x, y)).equals(MazeCellType.WALL);
+                stringBuilder.append(isWall ? "X" : "O");
+            }
+            stringBuilder.append(System.lineSeparator());
+        }
+
+        return stringBuilder.toString();
+    }
+
     public @Nullable Coordinate2D getCellLeft(@NotNull Coordinate2D cell) {
         if (cell.getX() == 0) {
             //cell is in left-most column
@@ -57,35 +87,12 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         return new Coordinate2D(cell.getX(), cell.getY() + 1);
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     public Coordinate2D getTopLeft() {
         return new Coordinate2D(0, 0);
     }
 
     public Coordinate2D getBottomRight() {
         return new Coordinate2D(width - 1, height - 1);
-    }
-
-    @Override
-    public String getStringRepresentation() {
-        var stringBuilder = new StringBuilder();
-
-        for (var y = 0; y < height; y++) {
-            for (var x = 0; x < width; x++) {
-                var isWall = getCellType(new Coordinate2D(x, y)).equals(MazeCellType.WALL);
-                stringBuilder.append(isWall ? "X" : "O");
-            }
-            stringBuilder.append(System.lineSeparator());
-        }
-
-        return stringBuilder.toString();
     }
 
     protected void ValidateCell(@Nullable Coordinate2D cell) {

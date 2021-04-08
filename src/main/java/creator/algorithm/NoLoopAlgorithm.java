@@ -31,7 +31,7 @@ public class NoLoopAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> 
         //2. pick start point of maze
         var wallList = new ArrayList<Coordinate2D>();
         var visited = new boolean[mazeTemplate.getWidth()][mazeTemplate.getHeight()];
-        var origin = new Coordinate2D(0, 0);
+        var origin = mazeTemplate.getTopLeft();
         wallList.add(origin);
 
         //3. while there are still walls in the wall list, add cells to maze
