@@ -3,7 +3,11 @@ package maze;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * A rectangular maze.
@@ -108,6 +112,17 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public @NotNull List<Coordinate2D> getNeighbors(@NotNull Coordinate2D cell) {
+        var allNeighbors = new Coordinate2D[]{getCellLeft(cell), getCellRight(cell), getCellAbove(cell), getCellBelow(cell)};
+        return Arrays.stream(allNeighbors).filter(Objects::nonNull).collect(Collectors.toList());
+    }
+
+    @Override
+    public @NotNull List<Coordinate2D> getNeighborsOfType(@NotNull Coordinate2D cell, MazeCellType cellType) {
+        return getNeighbors(cell).stream().filter(c -> getCellType(c) == cellType).collect(Collectors.toList());
     }
 
     public @Nullable Coordinate2D getCellLeft(@NotNull Coordinate2D cell) {

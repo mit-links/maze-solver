@@ -33,7 +33,7 @@ public class DFSSolver extends SolverBase {
                 return true;
             }
 
-            var neighbors = maze.getEmptyNeighbors(next);
+            var neighbors = maze.getNeighborsOfType(next, MazeCellType.EMPTY);
             var unvisitedNeighbors = neighbors.stream().filter(c -> !visited.contains(c)).collect(Collectors.toList());
 
             if (unvisitedNeighbors.isEmpty()) {

@@ -16,7 +16,12 @@ public abstract class MazeBase<CoordinateType extends Coordinate> implements Maz
     public abstract void setCellType(@NotNull CoordinateType cell, MazeCellType cellType);
 
     /**
-     * Get all neighbors that are of type {@link MazeCellType:EMPTY}
+     * Get all neighbors of a cell
      */
-    public abstract List<CoordinateType> getEmptyNeighbors(@NotNull CoordinateType cell);
+    public abstract @NotNull List<CoordinateType> getNeighbors(@NotNull CoordinateType cell);
+
+    /**
+     * Get all neighbors of a cell that are of a specific type
+     */
+    public abstract @NotNull List<CoordinateType> getNeighborsOfType(@NotNull CoordinateType cell, MazeCellType cellType);
 }

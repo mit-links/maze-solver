@@ -6,6 +6,7 @@ import maze.RectangularMaze;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -23,7 +24,7 @@ public class NoLoopAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> 
 
         //2. pick start point of maze
         var wallList = new ArrayList<Coordinate2D>();
-        var visited = new boolean[mazeTemplate.getWidth()][mazeTemplate.getHeight()];
+        var visited = new HashSet<Coordinate2D>();
         var origin = mazeTemplate.getTopLeft();
         wallList.add(origin);
 
@@ -37,14 +38,10 @@ public class NoLoopAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> 
 
             //get the unvisited neighbors and the number of non-wall neighbors
             var unvisitedNeighbors = new ArrayList<Coordinate2D>();
-            var neighbors = new Coordinate2D[]{mazeTemplate.getCellLeft(cell), mazeTemplate.getCellRight(cell), mazeTemplate.getCellAbove(cell), mazeTemplate.getCellBelow(cell)};
             var nonWallNeighbors = 0;
 
-            for (var neighbor : neighbors) {
-                if (neighbor == null) {
-                    continue;
-                }
-                if (!visited[neighbor.getX()][neighbor.getY()]) {
+            for (var neighbor : mazeTemplate.getNeighbors(cell)) {
+                if (!visited.contains(neighbor)) {
                     unvisitedNeighbors.add(neighbor);
                 }
                 if (!mazeTemplate.getCellType(neighbor).equals(MazeCellType.WALL)) {
@@ -59,7 +56,7 @@ public class NoLoopAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> 
             }
 
             //prepare for the next iteration
-            visited[cell.getX()][cell.getY()] = true;
+            visited.add(cell);
         }
     }
 }

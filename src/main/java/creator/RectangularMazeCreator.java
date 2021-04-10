@@ -3,6 +3,7 @@ package creator;
 import creator.algorithm.MazeCreationAlgorithmBase;
 import creator.algorithm.MazeCreationAlgorithmType;
 import creator.algorithm.NoLoopAlgorithm;
+import creator.algorithm.PrimAlgorithm;
 import maze.RectangularMaze;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,10 +36,10 @@ public abstract class RectangularMazeCreator extends MazeCreatorBase<Rectangular
 
     @Override
     protected @NotNull MazeCreationAlgorithmBase<RectangularMaze> getAlgorithm(MazeCreationAlgorithmType algorithmType) {
-        if (algorithmType == MazeCreationAlgorithmType.NO_LOOP) {
-            return new NoLoopAlgorithm();
-        }
-        return super.getAlgorithm(algorithmType);
+        return switch (algorithmType) {
+            case NO_LOOP -> new NoLoopAlgorithm();
+            case PRIM -> new PrimAlgorithm();
+        };
     }
 
     private void Validate(int width, int height) {
