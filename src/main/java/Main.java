@@ -3,7 +3,7 @@ import creator.algorithm.MazeCreationAlgorithmType;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import solver.DFSSolver;
-import visualize.RectangularMazeVisualizer;
+import visualization.RectangularMazeVisualizer;
 
 /**
  * Main class containing the main method
@@ -16,8 +16,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        var width = 200;
-        var height = 75;
+        var width = 500;
+        var height = 250;
 
         //create maze
         var start = System.currentTimeMillis();

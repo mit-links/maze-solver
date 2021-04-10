@@ -1,4 +1,4 @@
-package visualize;
+package visualization;
 
 import javafx.scene.paint.Color;
 import maze.Maze;

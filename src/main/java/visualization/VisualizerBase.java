@@ -1,4 +1,4 @@
-package visualize;
+package visualization;
 
 import javafx.stage.Stage;
 import maze.Maze;
