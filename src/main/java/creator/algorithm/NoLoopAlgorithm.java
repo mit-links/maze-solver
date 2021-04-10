@@ -18,15 +18,8 @@ public class NoLoopAlgorithm extends MazeCreationAlgorithmBase<RectangularMaze> 
 
     @Override
     public void createMaze(@NotNull RectangularMaze mazeTemplate) {
-        var width = mazeTemplate.getWidth();
-        var height = mazeTemplate.getHeight();
-
         //1. set the entire maze to walls
-        for (var y = 0; y < height; y++) {
-            for (var x = 0; x < width; x++) {
-                mazeTemplate.setCellType(new Coordinate2D(x, y), MazeCellType.WALL);
-            }
-        }
+        mazeTemplate.setAllToWalls();
 
         //2. pick start point of maze
         var wallList = new ArrayList<Coordinate2D>();

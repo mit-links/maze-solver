@@ -54,8 +54,6 @@ public class RectangularMazeVisualizer extends VisualizerBase<RectangularMaze> {
         }
 
         private void draw() {
-            System.out.println("Redrawing...");
-
             var blockWidth = getWidth() / maze.getWidth();
             var blockHeight = getHeight() / maze.getHeight();
             var blockSize = Math.floor(Math.min(blockWidth, blockHeight));

@@ -3,6 +3,8 @@ package maze;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Iterator;
+
 /**
  * A rectangular maze.
  * x coordinate goes from left to right, y coordinate from top to bottom.
@@ -28,6 +30,59 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
     @Override
     public MazeCellType getCellTypeGeneric(@NotNull Coordinate cell) {
         return getCellType((Coordinate2D) cell);
+    }
+
+    @Override
+    public void setCellTypeGeneric(@NotNull Coordinate cell, MazeCellType cellType) {
+        setCellType((Coordinate2D) cell, cellType);
+    }
+
+    @Override
+    public void setAllToWalls() {
+        var iterator = getIterator();
+        while (iterator.hasNext()) {
+            setCellType((Coordinate2D) iterator.next(), MazeCellType.WALL);
+        }
+    }
+
+    @Override
+    public Iterator<Coordinate> getIterator() {
+        //traversing 2D arrays can be done in 2 ways: traversing row-by-row is more efficient due to caching
+        return new Iterator<>() {
+            private @Nullable Coordinate2D currentCoordinate = null;
+
+            @Override
+            public boolean hasNext() {
+                return currentCoordinate == null || !currentCoordinate.equals(getBottomRight());
+            }
+
+            @Override
+            public Coordinate next() {
+                var nextCoordinate = getNext();
+                currentCoordinate = nextCoordinate;
+                return nextCoordinate;
+            }
+
+            private Coordinate2D getNext() {
+                if (currentCoordinate == null) {
+                    //iteration not started yet
+                    return getTopLeft();
+                }
+
+                if (currentCoordinate.equals(getBottomRight())) {
+                    //iteration completed, can't go further
+                    throw new IndexOutOfBoundsException();
+                }
+
+                if (currentCoordinate.getX() == width - 1) {
+                    //end of row reached
+                    return new Coordinate2D(0, currentCoordinate.getY() + 1);
+                }
+
+                //regular case (neither end of row, nor end of columns reached)
+                return new Coordinate2D(currentCoordinate.getX() + 1, currentCoordinate.getY());
+            }
+        };
     }
 
     @Override

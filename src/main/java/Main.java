@@ -16,8 +16,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        var width = 500;
-        var height = 250;
+        var width = 100;
+        var height = 50;
 
         //create maze
         var start = System.currentTimeMillis();
