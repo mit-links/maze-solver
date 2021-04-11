@@ -57,7 +57,7 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
 
             @Override
             public boolean hasNext() {
-                return currentCoordinate == null || !currentCoordinate.equals(getBottomRight());
+                return currentCoordinate == null || !currentCoordinate.equals(getEnd());
             }
 
             @Override
@@ -70,10 +70,10 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
             private Coordinate2D getNext() {
                 if (currentCoordinate == null) {
                     //iteration not started yet
-                    return getTopLeft();
+                    return getStart();
                 }
 
-                if (currentCoordinate.equals(getBottomRight())) {
+                if (currentCoordinate.equals(getEnd())) {
                     //iteration completed, can't go further
                     throw new IndexOutOfBoundsException();
                 }
@@ -112,6 +112,23 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean isValidCoordinate(@Nullable Coordinate2D coordinate) {
+        if (coordinate == null) {
+            return false;
+        }
+
+        if (coordinate.getX() < 0 || coordinate.getX() >= width) {
+            return false;
+        }
+
+        if (coordinate.getY() < 0 || coordinate.getY() >= height) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -157,11 +174,17 @@ public abstract class RectangularMaze extends MazeBase<Coordinate2D> {
         return new Coordinate2D(cell.getX(), cell.getY() + 1);
     }
 
-    public Coordinate2D getTopLeft() {
+    /**
+     * Get the start of the maze
+     */
+    public Coordinate2D getStart() {
         return new Coordinate2D(0, 0);
     }
 
-    public Coordinate2D getBottomRight() {
+    /**
+     * Get the end of the maze
+     */
+    public Coordinate2D getEnd() {
         return new Coordinate2D(width - 1, height - 1);
     }
 

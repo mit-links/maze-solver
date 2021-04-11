@@ -58,6 +58,13 @@ public class RectangularMazeVisualizer extends VisualizerBase<RectangularMaze> {
             var blockHeight = getHeight() / maze.getHeight();
             var blockSize = Math.floor(Math.min(blockWidth, blockHeight));
 
+            if (blockSize == 0) {
+                System.out.println("Maze is too large to draw");
+                setWidth(0);
+                setHeight(0);
+                return;
+            }
+
             var context = getGraphicsContext2D();
 
             context.setFill(backgroundColor);

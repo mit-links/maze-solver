@@ -4,5 +4,8 @@ package creator.algorithm;
  * Types of algorithms to create mazes
  */
 public enum MazeCreationAlgorithmType {
-    NO_LOOP, PRIM
+    //regular Prim algorithm (randomized, non-deterministic)
+    PRIM_RANDOMIZED,
+
+    DFS
 }

@@ -1,6 +1,7 @@
 package maze;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public abstract class MazeBase<CoordinateType extends Coordinate> implements Maz
     public abstract MazeCellType getCellType(@NotNull CoordinateType cell);
 
     public abstract void setCellType(@NotNull CoordinateType cell, MazeCellType cellType);
+
+    public abstract boolean isValidCoordinate(@Nullable CoordinateType coordinate);
 
     /**
      * Get all neighbors of a cell
