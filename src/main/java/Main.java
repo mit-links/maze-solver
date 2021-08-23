@@ -3,6 +3,8 @@ import creator.algorithm.MazeCreationAlgorithmType;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import solver.DFSSolver;
+import solver.SolverBase;
+import solver.SolverType;
 import visualization.RectangularMazeVisualizer;
 
 /**
@@ -10,16 +12,18 @@ import visualization.RectangularMazeVisualizer;
  */
 public class Main extends Application {
 
+    //Change these fields to configure the behavior of the application
+    private final int width = 150;
+    private final int height = 75;
+    private final MazeCreationAlgorithmType algorithmType = MazeCreationAlgorithmType.DFS;
+    private final SolverType solverType = SolverType.DFS;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) {
-        var width = 2000;
-        var height = 2000;
-        var algorithmType = MazeCreationAlgorithmType.DFS;
-
         //create maze
         var start = System.currentTimeMillis();
         var creator = new BasicRectangularMazeCreator();
@@ -29,7 +33,7 @@ public class Main extends Application {
 
         //solve maze
         start = System.currentTimeMillis();
-        var solver = new DFSSolver();
+        var solver = getSolver();
         var success = solver.solve(maze, maze.getStart(), maze.getEnd());
         end = System.currentTimeMillis();
         System.out.printf("Solved maze using solver %s. Success: %s. Took %d ms%n", solver.getClass().getSimpleName(), success, end - start);
@@ -37,5 +41,11 @@ public class Main extends Application {
         //visualize maze
         var visualizer = new RectangularMazeVisualizer(stage);
         visualizer.visualizeMaze(maze);
+    }
+
+    private SolverBase getSolver() {
+        return switch (solverType) {
+            case DFS -> new DFSSolver();
+        };
     }
 }
